@@ -1,6 +1,6 @@
-package ke.co.mobimech.mpesab2c2.API;
+package ke.co.mobimech.mpesa.API;
 
-import ke.co.mobimech.mpesab2c2.API.Remote.NetworkClient;
+import ke.co.mobimech.mpesa.API.Remote.NetworkClient;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 

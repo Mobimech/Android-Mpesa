@@ -1,1 +1,1 @@
-include ':app', ':mpesab2c'
+include ':app', ':mpesa'

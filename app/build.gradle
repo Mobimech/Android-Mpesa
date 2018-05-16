@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "mobimech.co.mpesab2c"
+        applicationId "mobimech.co.mpesa"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     //The mpesa Library
-    implementation project(':mpesab2c')
+    implementation project(':mpesa')
 
 
 }

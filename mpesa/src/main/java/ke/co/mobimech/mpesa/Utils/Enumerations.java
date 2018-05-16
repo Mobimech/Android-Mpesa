@@ -1,4 +1,4 @@
-package ke.co.mobimech.mpesab2c2.Utils;
+package ke.co.mobimech.mpesa.Utils;
 
 
 public enum Enumerations {

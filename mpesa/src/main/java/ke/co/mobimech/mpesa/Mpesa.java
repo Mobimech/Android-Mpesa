@@ -1,15 +1,14 @@
-package ke.co.mobimech.mpesab2c2;
+package ke.co.mobimech.mpesa;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import ke.co.mobimech.mpesab2c2.API.ApiUtils;
-import ke.co.mobimech.mpesab2c2.API.Models.AccessToken;
-import ke.co.mobimech.mpesab2c2.API.Models.B2CPaymentRequest;
-import ke.co.mobimech.mpesab2c2.API.Models.B2CPaymentResponse;
-import ke.co.mobimech.mpesab2c2.API.URLs;
-import ke.co.mobimech.mpesab2c2.Utils.Enumerations;
+import ke.co.mobimech.mpesa.API.ApiUtils;
+import ke.co.mobimech.mpesa.API.Models.AccessToken;
+import ke.co.mobimech.mpesa.API.Models.B2CPaymentRequest;
+import ke.co.mobimech.mpesa.API.Models.B2CPaymentResponse;
+import ke.co.mobimech.mpesa.API.URLs;
+import ke.co.mobimech.mpesa.Utils.Enumerations;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

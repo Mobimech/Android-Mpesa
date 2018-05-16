@@ -1,4 +1,4 @@
-package ke.co.mobimech.mpesab2c2;
+package ke.co.mobimech.mpesa;
 
 import android.support.annotation.NonNull;
 
