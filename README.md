@@ -1,9 +1,15 @@
 # Android Mpesa B2C & C2B  ALPHA (NOT YET PUBLISHED)
+
+### B2C Payments
 Business to Customer (B2C) transactions between a company and customers who are the end-users of its products or services. Use of this API requires a valid and verified B2C M-Pesa Short code.
 
-Add this module to your android project and access Mpesa B2C.
 
-This can be used for fund disbursements.
+
+### C2B using Lipa na Mpesa Online
+Lipa na M-Pesa Online Payment API is used to initiate a 
+M-Pesa transaction on behalf of a customer using STK Push. 
+This is the same technique mySafaricom App uses 
+whenever the app is used to make payments
 
 ## Possible applications:
 
