@@ -21,6 +21,9 @@ import ke.co.mobimech.mpesab2c2.API.Models.B2CPaymentResponse;
 import ke.co.mobimech.mpesab2c2.Mpesa;
 import ke.co.mobimech.mpesab2c2.MpesaLib;
 
+import static ke.co.mobimech.mpesab2c2.Utils.Enumerations.PRODUCTION;
+import static ke.co.mobimech.mpesab2c2.Utils.Enumerations.SANDBOX;
+
 public class MainActivity extends AppCompatActivity {
 
     Mpesa mpesa;
@@ -45,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * Use your Daraja app credentials to initiate the mpesa module.
+         * Make sure you specify whether you are on sandbox or production.
          */
-        mpesa=Mpesa.with("oTyqtS9FNz2pSGRagaam5Kw2PkInboUF", "Bkf6Aok2zYx6H92i", new MpesaLib<AccessToken>() {
+        mpesa=Mpesa.with("", "",SANDBOX, new MpesaLib<AccessToken>() {
+
             @Override
             public void onResult(@NonNull AccessToken accessToken) {
                 Toast.makeText(MainActivity.this, "TOKEN : " + accessToken.getAccess_token(), Toast.LENGTH_SHORT).show();

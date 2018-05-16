@@ -27,12 +27,13 @@ public class Mpesa {
         this.CONSUMER_SECRET = CONSUMER_SECRET;
         this.BASE_URL = (environment == Enumerations.SANDBOX) ? URLs.SANDBOX_BASE_URL : URLs.PRODUCTION_BASE_URL;
     }
+
+    //Generate the Auth Token
     public static Mpesa with(String consumerKey, String consumerSecret,  MpesaLib<AccessToken> MpesaLib) {
         return with(consumerKey, consumerSecret, Enumerations.SANDBOX, MpesaLib);
     }
-
-    public static Mpesa with(String CONSUMER_KEY, String CONSUMER_SECRET, Enumerations env, MpesaLib<AccessToken> listener) {
-        Mpesa mpesa = new Mpesa(env, CONSUMER_KEY, CONSUMER_SECRET);
+    public static Mpesa with(String consumerKey, String consumerSecret, Enumerations environment, MpesaLib<AccessToken> listener) {
+        Mpesa mpesa = new Mpesa(environment, consumerKey, consumerSecret);
         mpesa.auth(listener);
         return mpesa;
     }
