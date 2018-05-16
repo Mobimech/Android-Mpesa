@@ -93,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.pay)
-    public void makePayment(){
-        Log.wtf("Button","Click pay");
+    public void makeSTKPayment(){
         C2BPaymentRequest request = new C2BPaymentRequest(
                 "174379",
                 "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
@@ -120,6 +119,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         );
+
+    }
+
+    @OnClick(R.id.send)
+    public void makeB2CPayment(){
+        B2CPaymentRequest request=new B2CPaymentRequest(
+                "100",
+                "BusinessPayment",
+                "600251",
+                "254708374149",
+                "http://mobimech.co.ke/",
+                "Good",
+                "testapi251",
+                "Safaricom251!",
+                "http://mobimech.co.ke/",
+                "Good"
+        );
+
+        mpesa.B2CMpesaPayment(request, new MpesaLib<B2CPaymentResponse>() {
+            @Override
+            public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
+                Log.wtf("Button","success");
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.wtf("Button","Fail: "+error);
+
+            }
+        });
 
     }
 }
