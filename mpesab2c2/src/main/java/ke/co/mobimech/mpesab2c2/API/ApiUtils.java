@@ -1,10 +1,10 @@
 package ke.co.mobimech.mpesab2c2.API;
 
+import ke.co.mobimech.mpesab2c2.API.Remote.NetworkClient;
+import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiUtils {
-    private static API api = null;
-    private static AuthAPI authAPI = null;
     private static HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
 
     static {
@@ -12,14 +12,14 @@ public class ApiUtils {
     }
 
     public static API getPaymentAPI(String BASE_URL, String authToken) {
-
-        return api;
+        OkHttpClient client= NetworkClient.getPaymentOkhttpClient(authToken);
+        return NetworkClient.getClient(BASE_URL,client).create(API.class);
     }
 
-    public static AuthAPI getAuthAPI(String CONSUMER_KEY, String CONSUMER_SECRET, String BASE_URL) {
+    public static AuthAPI getAuthenticationAPI(String CONSUMER_KEY, String CONSUMER_SECRET, String BASE_URL) {
 
-
-        return authAPI;
+        OkHttpClient client=NetworkClient.getAuthenticationOkhttpClient(CONSUMER_KEY,CONSUMER_SECRET);
+        return NetworkClient.getClient(BASE_URL,client).create(AuthAPI.class);
     }
 
 }
