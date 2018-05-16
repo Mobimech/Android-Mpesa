@@ -1,5 +1,7 @@
 package ke.co.mobimech.mpesab2c2.API.Remote;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 import ke.co.mobimech.mpesab2c2.API.Interceptors.AccessTokenInterceptor;
 import ke.co.mobimech.mpesab2c2.API.Interceptors.AuthInterceptor;
@@ -28,24 +30,38 @@ public class NetworkClient {
     }
 
     public static OkHttpClient getPaymentOkhttpClient(String authToken) {
-        okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(INPUT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(FETCH_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new AuthInterceptor(authToken))
-                .build();
+        try {
+            okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                    .writeTimeout(INPUT_TIMEOUT, TimeUnit.SECONDS)
+                    .sslSocketFactory(new TLSSocketFactory())
+                    .readTimeout(FETCH_TIMEOUT, TimeUnit.SECONDS)
+                    .addInterceptor(httpLoggingInterceptor)
+                    .addInterceptor(new AuthInterceptor(authToken))
+                    .build();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         return okHttpClient;
     }
 
     public static OkHttpClient getAuthenticationOkhttpClient(String CONSUMER_KEY, String CONSUMER_SECRET) {
-        okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(INPUT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(FETCH_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new AccessTokenInterceptor(CONSUMER_KEY, CONSUMER_SECRET))
-                .build();
+        try {
+            okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                    .writeTimeout(INPUT_TIMEOUT, TimeUnit.SECONDS)
+                    .sslSocketFactory(new TLSSocketFactory())
+                    .readTimeout(FETCH_TIMEOUT, TimeUnit.SECONDS)
+                    .addInterceptor(httpLoggingInterceptor)
+                    .addInterceptor(new AccessTokenInterceptor(CONSUMER_KEY, CONSUMER_SECRET))
+                    .build();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         return okHttpClient;
     }
 }

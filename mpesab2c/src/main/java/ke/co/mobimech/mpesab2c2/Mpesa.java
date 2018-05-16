@@ -2,6 +2,7 @@ package ke.co.mobimech.mpesab2c2;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import ke.co.mobimech.mpesab2c2.API.ApiUtils;
 import ke.co.mobimech.mpesab2c2.API.Models.AccessToken;
@@ -37,6 +38,7 @@ public class Mpesa {
     }
 
     private void auth(final MpesaLib<AccessToken> listener) {
+
         ApiUtils.getAuthenticationAPI(CONSUMER_KEY, CONSUMER_SECRET, BASE_URL).getAccessToken().enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(@NonNull Call<AccessToken> call, @NonNull Response<AccessToken> response) {
