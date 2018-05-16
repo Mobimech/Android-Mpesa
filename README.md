@@ -5,7 +5,7 @@ Add this module to your android project and access Mpesa B2C.
 
 This can be used for fund disbursements.
 
-##Possible applications:
+## Possible applications:
 
 Mobile Loan Disbursements. <br/>
 Fund withdrawal to mpesa from mobile wallets.<br/>
