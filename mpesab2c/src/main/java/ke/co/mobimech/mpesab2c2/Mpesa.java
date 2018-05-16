@@ -50,7 +50,7 @@ public class Mpesa {
                         return;
                     }
                 }
-                listener.onError("Authentication Failed");
+                listener.onError("Authentication Failed: "+response.raw());
             }
 
             @Override
@@ -89,7 +89,7 @@ public class Mpesa {
                         return;
                     }
                 }
-                listener.onError("B2C payment Failed");
+                listener.onError("B2C payment Failed:"+" "+response.raw());
             }
 
             @Override
