@@ -18,6 +18,8 @@ import butterknife.OnClick;
 import ke.co.mobimech.mpesa.API.Models.AccessToken;
 import ke.co.mobimech.mpesa.API.Models.B2CPaymentRequest;
 import ke.co.mobimech.mpesa.API.Models.B2CPaymentResponse;
+import ke.co.mobimech.mpesa.API.Models.C2BPaymentRequest;
+import ke.co.mobimech.mpesa.API.Models.C2BPaymentResponse;
 import ke.co.mobimech.mpesa.Mpesa;
 import ke.co.mobimech.mpesa.MpesaLib;
 
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
          * Use your Daraja app credentials to initiate the mpesa module.
          * Make sure you specify whether you are on sandbox or production.
          */
+
         mpesa=Mpesa.with("oTyqtS9FNz2pSGRagaam5Kw2PkInboUF", "Bkf6Aok2zYx6H92i",SANDBOX, new MpesaLib<AccessToken>() {
 
             @Override
@@ -91,32 +94,32 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.pay)
     public void makePayment(){
-        B2CPaymentRequest request= new B2CPaymentRequest(
+        Log.wtf("Button","Click pay");
+        C2BPaymentRequest request = new C2BPaymentRequest(
+                "174379",
+                "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
                 "100",
-                "BusinessPayment",
-                "600251",
                 "254708374149",
-                "",
-                "Refund",
-                "testapi251",
-                "Safaricom251!",
-                "",
-                ""
+                "174379",
+                "254713197277",
+                "http://mycallbackurl.com/checkout.php",
+                "001ABC",
+                "Goods Payment"
         );
 
-        mpesa.B2CMpesaPayment(request, new MpesaLib<B2CPaymentResponse>() {
+        mpesa.C2BStkPushPayment(request, new MpesaLib<C2BPaymentResponse>() {
             @Override
-            public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
-                Log.wtf(MainActivity.this.getClass().getSimpleName(), b2CPaymentResponse.ResponseDescription);
-
+            public void onResult(@NonNull C2BPaymentResponse c2BPaymentResponse) {
+                Log.wtf("Button","success");
             }
 
             @Override
             public void onError(String error) {
-                Log.wtf(MainActivity.this.getClass().getSimpleName(), error);
-
+                Log.wtf("Button","Fail: "+error);
             }
-        });
+        }
+
+        );
 
     }
 }

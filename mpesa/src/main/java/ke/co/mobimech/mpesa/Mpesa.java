@@ -7,7 +7,10 @@ import ke.co.mobimech.mpesa.API.ApiUtils;
 import ke.co.mobimech.mpesa.API.Models.AccessToken;
 import ke.co.mobimech.mpesa.API.Models.B2CPaymentRequest;
 import ke.co.mobimech.mpesa.API.Models.B2CPaymentResponse;
+import ke.co.mobimech.mpesa.API.Models.C2BPaymentRequest;
+import ke.co.mobimech.mpesa.API.Models.C2BPaymentResponse;
 import ke.co.mobimech.mpesa.API.URLs;
+import ke.co.mobimech.mpesa.Utils.CommonUtils;
 import ke.co.mobimech.mpesa.Utils.Enumerations;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,6 +21,8 @@ public class Mpesa {
     private String BASE_URL;
     private String CONSUMER_KEY;
     private String CONSUMER_SECRET;
+    public static final String TRANSACTION_TYPE_CUSTOMER_PAYBILL_ONLINE = "CustomerPayBillOnline";
+
     @Nullable
     private AccessToken accessToken;
 
@@ -99,6 +104,53 @@ public class Mpesa {
         });
 
     }
+
+    public void C2BStkPushPayment(C2BPaymentRequest c2BPaymentRequest, final MpesaLib<C2BPaymentResponse> listener) {
+
+        if (accessToken == null) {
+            listener.onError("Not Authenticated");
+            return;
+        }
+
+        String sanitizedPhoneNumber = CommonUtils.formatPhoneNumber(c2BPaymentRequest.getPhoneNumber());
+        String sanitizedPartyA = CommonUtils.formatPhoneNumber(c2BPaymentRequest.getPartyA());
+        String timeStamp = CommonUtils.getTimestamp();
+        String generatedPassword = CommonUtils.getPassword(c2BPaymentRequest.getBusinessShortCode(), c2BPaymentRequest.getPassKey(), timeStamp);
+
+        C2BPaymentRequest express = new C2BPaymentRequest(
+                c2BPaymentRequest.getBusinessShortCode(),
+                generatedPassword,
+                timeStamp,
+                TRANSACTION_TYPE_CUSTOMER_PAYBILL_ONLINE,
+                c2BPaymentRequest.getAmount(),
+                sanitizedPartyA,
+                c2BPaymentRequest.getPartyB(),
+                sanitizedPhoneNumber,
+                c2BPaymentRequest.getCallBackURL(),
+                c2BPaymentRequest.getAccountReference(),
+                c2BPaymentRequest.getTransactionDesc()
+        );
+
+        ApiUtils.getSTKPushAPI(BASE_URL, accessToken.getAccess_token()).makeC2BPayment(express).enqueue(new Callback<C2BPaymentResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<C2BPaymentResponse> call, @NonNull Response<C2BPaymentResponse> response) {
+                if (response.isSuccessful()) {
+                    C2BPaymentResponse c2BPaymentResponse = response.body();
+                    if (c2BPaymentResponse != null) {
+                        listener.onResult(c2BPaymentResponse);
+                        return;
+                    }
+                }
+                listener.onError("MPESAExpress Failed: "+response.raw());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<C2BPaymentResponse> call, @NonNull Throwable t) {
+                listener.onError("MPESAExpress Failed: " + t.getLocalizedMessage());
+            }
+        });
+    }
+
 
 
 }

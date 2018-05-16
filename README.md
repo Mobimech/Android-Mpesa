@@ -1,4 +1,4 @@
-# Android-Mpesa-B2C ALPHA (NOT YET PUBLISHED)
+# Android Mpesa B2C & C2B  ALPHA (NOT YET PUBLISHED)
 Business to Customer (B2C) transactions between a company and customers who are the end-users of its products or services. Use of this API requires a valid and verified B2C M-Pesa Short code.
 
 Add this module to your android project and access Mpesa B2C.
