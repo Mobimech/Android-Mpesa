@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /**
-         * Use your Daraja credentials to initiate the mpesa module.
+         * Use your Daraja app credentials to initiate the mpesa module.
          */
-        mpesa=Mpesa.with("", "", new MpesaLib<AccessToken>() {
+        mpesa=Mpesa.with("oTyqtS9FNz2pSGRagaam5Kw2PkInboUF", "Bkf6Aok2zYx6H92i", new MpesaLib<AccessToken>() {
             @Override
             public void onResult(@NonNull AccessToken accessToken) {
                 Toast.makeText(MainActivity.this, "TOKEN : " + accessToken.getAccess_token(), Toast.LENGTH_SHORT).show();
@@ -88,14 +88,14 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.pay)
     public void makePayment(){
         B2CPaymentRequest request= new B2CPaymentRequest(
+                "100",
+                "BusinessPayment",
+                "600251",
+                "254708374149",
                 "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                "Refund",
+                "testapi251",
+                "Safaricom251!",
                 "",
                 ""
         );
