@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Use your Daraja credentials to initiate the mpesa module.
          */
-        mpesa=Mpesa.with("oTyqtS9FNz2pSGRagaam5Kw2PkInboUF", "Bkf6Aok2zYx6H92i", new MpesaLib<AccessToken>() {
+        mpesa=Mpesa.with("", "", new MpesaLib<AccessToken>() {
             @Override
             public void onResult(@NonNull AccessToken accessToken) {
                 Toast.makeText(MainActivity.this, "TOKEN : " + accessToken.getAccess_token(), Toast.LENGTH_SHORT).show();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 Toast.makeText(MainActivity.this, error,Toast.LENGTH_SHORT).show();
-                Log.wtf("AUTHENTICATION",error);
+                Log.wtf("AUTHENTICATION ERROR: ",error);
 
             }
         });
