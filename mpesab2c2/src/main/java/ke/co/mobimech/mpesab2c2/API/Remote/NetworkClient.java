@@ -7,9 +7,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import static ke.co.mobimech.mpesab2c2.Utiils.CommonUtils.CONNECTION_TIMEOUT;
-import static ke.co.mobimech.mpesab2c2.Utiils.CommonUtils.FETCH_TIMEOUT;
-import static ke.co.mobimech.mpesab2c2.Utiils.CommonUtils.INPUT_TIMEOUT;
+import static ke.co.mobimech.mpesab2c2.Utils.CommonUtils.CONNECTION_TIMEOUT;
+import static ke.co.mobimech.mpesab2c2.Utils.CommonUtils.FETCH_TIMEOUT;
+import static ke.co.mobimech.mpesab2c2.Utils.CommonUtils.INPUT_TIMEOUT;
 
 public class NetworkClient {
     private static Retrofit retrofit = null;

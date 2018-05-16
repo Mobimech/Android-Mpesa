@@ -1,4 +1,4 @@
-package ke.co.mobimech.mpesab2c2.Utiils;
+package ke.co.mobimech.mpesab2c2.Utils;
 
 public class CommonUtils {
     public static final int CONNECTION_TIMEOUT = 60000;
