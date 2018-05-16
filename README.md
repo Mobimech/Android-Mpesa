@@ -7,10 +7,10 @@ This can be used for fund disbursements.
 
 ## Possible applications:
 
-Mobile Loan Disbursements. <br/>
-Fund withdrawal to mpesa from mobile wallets.<br/>
-Pay salaries to mpesa.<br/>
-Send payment refunds.<br/>
+Initiate mobile Loan Disbursements. <br/>
+Initiate fund withdrawal to mpesa from mobile wallets/apps.<br/>
+Initiate salary/wage payment to mpesa.<br/>
+Initiate refund transactions.<br/>
 
 
 ## License
