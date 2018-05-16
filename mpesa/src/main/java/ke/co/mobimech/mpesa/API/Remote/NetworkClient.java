@@ -30,6 +30,25 @@ public class NetworkClient {
     }
 
     public static OkHttpClient getPaymentOkhttpClient(String authToken) {
+        OkHttpClient client = null;
+        try {
+            client = new OkHttpClient.Builder()
+                    .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+                    .writeTimeout(FETCH_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(INPUT_TIMEOUT, TimeUnit.SECONDS)
+                    .addInterceptor(httpLoggingInterceptor)
+                    .sslSocketFactory(new TLSSocketFactory())
+                    .addInterceptor(new AuthInterceptor(authToken))
+                    .build();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
+    public static OkHttpClient getSTKPushOkhttpClient(String authToken) {
         try {
             okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
