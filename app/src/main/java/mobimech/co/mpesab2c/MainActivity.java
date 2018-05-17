@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
                     dialog.dismiss();
-                    editText.setText("");
+                    edAmount.setText("");
                     Log.wtf("Button", "success");
                     Toast.makeText(MainActivity.this, "Success",Toast.LENGTH_SHORT).show();
                 }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onError(String error) {
                     dialog.dismiss();
-                    editText.setText("");
+                    edAmount.setText("");
                     Log.wtf("Button", "Fail: " + error);
                     Toast.makeText(MainActivity.this, "Fail: "+error,Toast.LENGTH_SHORT).show();
 
