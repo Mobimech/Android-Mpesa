@@ -4,34 +4,12 @@ public class B2CPaymentResponse {
     public String OriginatorConversationId;
     public String ConversationId;
     public String ResponseDescription;
+    public String ConversationID;
+    public String ResponseCode;
 
-    public B2CPaymentResponse(String originatorConversationId, String conversationId, String responseDescription) {
-        OriginatorConversationId = originatorConversationId;
-        ConversationId = conversationId;
-        ResponseDescription = responseDescription;
+    public B2CPaymentResponse() {
+
     }
 
-    public String getOriginatorConversationId() {
-        return OriginatorConversationId;
-    }
 
-    public void setOriginatorConversationId(String originatorConversationId) {
-        OriginatorConversationId = originatorConversationId;
-    }
-
-    public String getConversationId() {
-        return ConversationId;
-    }
-
-    public void setConversationId(String conversationId) {
-        ConversationId = conversationId;
-    }
-
-    public String getResponseDescription() {
-        return ResponseDescription;
-    }
-
-    public void setResponseDescription(String responseDescription) {
-        ResponseDescription = responseDescription;
-    }
 }

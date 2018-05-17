@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Declare Mpesa
      */
-    Mpesa mpesa;
+    private Mpesa mpesa;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -175,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
                     "Good",
                     "600251",
                     "254708374149",
-                    "http://mycallbackurl.com/checkout.php",
+                    "https://mobimech.azurewebsites.net/callback.php",
                     "Good",
-                    "http://mycallbackurl.com/checkout.php",
+                    "https://mobimech.azurewebsites.net/callback.php",
                     "Safaricom251!"
             );
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
                     dialog.dismiss();
-                    editText.setText("");
+                    edAmount.setText("");
                     Log.wtf("Button", "success");
                     Toast.makeText(MainActivity.this, "Success",Toast.LENGTH_SHORT).show();
                 }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onError(String error) {
                     dialog.dismiss();
-                    editText.setText("");
+                    edAmount.setText("");
                     Log.wtf("Button", "Fail: " + error);
                     Toast.makeText(MainActivity.this, "Fail: "+error,Toast.LENGTH_SHORT).show();
 
