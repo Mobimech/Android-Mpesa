@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Declare Mpesa
      */
-    Mpesa mpesa;
+    private Mpesa mpesa;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
