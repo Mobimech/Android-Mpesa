@@ -72,16 +72,16 @@ public class Mpesa {
             return;
         }
         B2CPaymentRequest request= new B2CPaymentRequest(
-                b2CPaymentRequest.getInitiatorName(),
-                b2CPaymentRequest.getSecurityCredential(),
                 b2CPaymentRequest.getAmount(),
                 b2CPaymentRequest.getCommandID(),
-                b2CPaymentRequest.getRemarks(),
+                b2CPaymentRequest.getInitiatorName(),
+                b2CPaymentRequest.getOccassion(),
                 b2CPaymentRequest.getPartyA(),
                 b2CPaymentRequest.getPartyB(),
                 b2CPaymentRequest.getQueueTimeOutURL(),
+                b2CPaymentRequest.getRemarks(),
                 b2CPaymentRequest.getResultURL(),
-                b2CPaymentRequest.getOccassion()
+                b2CPaymentRequest.getSecurityCredential()
         );
 
         ApiUtils.getPaymentAPI(BASE_URL, accessToken.getAccess_token()).makeB2CPayment(request).enqueue(new Callback<B2CPaymentResponse>() {

@@ -12,7 +12,7 @@ public class B2CPaymentRequest {
     public String ResultURL;
     public String Occassion;
 
-    public B2CPaymentRequest( String amount, String commandID, String partyA, String partyB, String queueTimeOutURL, String remarks, String initiatorName, String securityCredential, String resultURL, String occassion) {
+    public B2CPaymentRequest(String amount, String commandID, String initiatorName, String occassion, String partyA, String partyB, String queueTimeOutURL, String remarks, String resultURL, String securityCredential) {
         InitiatorName = initiatorName;
         SecurityCredential = securityCredential;
         CommandID = commandID;
@@ -24,6 +24,8 @@ public class B2CPaymentRequest {
         ResultURL = resultURL;
         Occassion = occassion;
     }
+
+
 
     public String getInitiatorName() {
         return InitiatorName;
