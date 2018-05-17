@@ -1,15 +1,18 @@
 package mobimech.co.mpesab2c;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -27,9 +30,19 @@ import static ke.co.mobimech.mpesa.Utils.Enumerations.SANDBOX;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ProgressDialog dialog;
+
+    /**
+     * Declare Mpesa
+     */
     Mpesa mpesa;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.edPhone)
+    EditText editText;
+    @BindView(R.id.edAmount)
+    EditText edAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /**
-         * Use your Daraja app credentials to initiate the mpesa module.
-         * Make sure you specify whether you are on sandbox or production.
+         * Use your Daraja app credentials to initialize the mpesa module.
+         * Make sure you specify whether you are on sandbox or production(Third parameter).
+         * I don't recommend this kind of implementation. (This is just for testing purposes)
          */
 
         mpesa=Mpesa.with("oTyqtS9FNz2pSGRagaam5Kw2PkInboUF", "Bkf6Aok2zYx6H92i",SANDBOX, new MpesaLib<AccessToken>() {
@@ -92,63 +106,88 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.pay)
+    @OnClick(R.id.stkPush)
     public void makeSTKPayment(){
-        C2BPaymentRequest request = new C2BPaymentRequest(
-                "174379",
-                "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
-                "100",
-                "254708374149",
-                "174379",
-                "254713197277",
-                "http://mycallbackurl.com/checkout.php",
-                "001ABC",
-                "Goods Payment"
-        );
 
-        mpesa.C2BStkPushPayment(request, new MpesaLib<C2BPaymentResponse>() {
-            @Override
-            public void onResult(@NonNull C2BPaymentResponse c2BPaymentResponse) {
-                Log.wtf("Button","success");
-            }
+        String phoneNumber = editText.getText().toString().trim();
 
-            @Override
-            public void onError(String error) {
-                Log.wtf("Button","Fail: "+error);
-            }
+        if (TextUtils.isEmpty(phoneNumber)) {
+            editText.setError("Please Provide a Phone Number");
+            return;
+        }else {
+            dialog = new ProgressDialog(this);
+            dialog.setMessage("Please wait");
+            dialog.setCancelable(false);
+            dialog.show();
+            C2BPaymentRequest request = new C2BPaymentRequest(
+                    "174379",
+                    "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
+                    "100",
+                    "254708374149",
+                    "174379",
+                    phoneNumber,
+                    "http://mycallbackurl.com/checkout.php",
+                    "001ABC",
+                    "Goods Payment"
+            );
+
+            mpesa.C2BStkPushPayment(request, new MpesaLib<C2BPaymentResponse>() {
+                        @Override
+                        public void onResult(@NonNull C2BPaymentResponse c2BPaymentResponse) {
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "Success",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            dialog.dismiss();
+                            Log.wtf("Button","Fail: "+error);
+                            Toast.makeText(MainActivity.this, "Fail",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+            );
+
         }
 
-        );
 
     }
 
-    @OnClick(R.id.send)
-    public void makeB2CPayment(){
-        B2CPaymentRequest request=new B2CPaymentRequest(
-                "100",
-                "BusinessPayment",
-                "600251",
-                "254708374149",
-                "http://mobimech.co.ke/",
-                "Good",
-                "testapi251",
-                "Safaricom251!",
-                "http://mobimech.co.ke/",
-                "Good"
-        );
+    @OnClick(R.id.b2csend)
+    public void makeB2CPayment() {
+        String amount = edAmount.getText().toString().trim();
 
-        mpesa.B2CMpesaPayment(request, new MpesaLib<B2CPaymentResponse>() {
-            @Override
-            public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
-                Log.wtf("Button","success");
-            }
+        if (TextUtils.isEmpty(amount)) {
+            editText.setError("Please Provide a Phone Number");
+            return;
+        } else {
+            B2CPaymentRequest request = new B2CPaymentRequest(
+                    amount,
+                    "BusinessPayment",
+                    "600251",
+                    "254708374149",
+                    "http://mycallbackurl.com/checkout.php",
+                    "Good",
+                    "testapi251",
+                    "Safaricom251!",
+                    "http://mycallbackurl.com/checkout.php",
+                    "Good"
+            );
 
-            @Override
-            public void onError(String error) {
-                Log.wtf("Button","Fail: "+error);
+            mpesa.B2CMpesaPayment(request, new MpesaLib<B2CPaymentResponse>() {
+                @Override
+                public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
+                    Log.wtf("Button", "success");
+                }
 
-            }
-        });
+                @Override
+                public void onError(String error) {
+                    Log.wtf("Button", "Fail: " + error);
+
+                }
+            });
+
+        }
 
     }
 }

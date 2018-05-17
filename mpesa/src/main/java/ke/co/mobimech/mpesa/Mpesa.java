@@ -9,7 +9,7 @@ import ke.co.mobimech.mpesa.API.Models.B2CPaymentRequest;
 import ke.co.mobimech.mpesa.API.Models.B2CPaymentResponse;
 import ke.co.mobimech.mpesa.API.Models.C2BPaymentRequest;
 import ke.co.mobimech.mpesa.API.Models.C2BPaymentResponse;
-import ke.co.mobimech.mpesa.API.URLs;
+import ke.co.mobimech.mpesa.API.URIs;
 import ke.co.mobimech.mpesa.Utils.CommonUtils;
 import ke.co.mobimech.mpesa.Utils.Enumerations;
 import retrofit2.Call;
@@ -29,7 +29,7 @@ public class Mpesa {
     private Mpesa(Enumerations environment, String CONSUMER_KEY, String CONSUMER_SECRET){
         this.CONSUMER_KEY = CONSUMER_KEY;
         this.CONSUMER_SECRET = CONSUMER_SECRET;
-        this.BASE_URL = (environment == Enumerations.SANDBOX) ? URLs.SANDBOX_BASE_URL : URLs.PRODUCTION_BASE_URL;
+        this.BASE_URL = (environment == Enumerations.SANDBOX) ? URIs.SANDBOX_BASE_URL : URIs.PRODUCTION_BASE_URL;
     }
 
     //Generate the Auth Token
