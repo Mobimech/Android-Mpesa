@@ -175,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
                     "Good",
                     "600251",
                     "254708374149",
-                    "http://mycallbackurl.com/checkout.php",
+                    "https://mobimech.azurewebsites.net/callback.php",
                     "Good",
-                    "http://mycallbackurl.com/checkout.php",
+                    "https://mobimech.azurewebsites.net/callback.php",
                     "Safaricom251!"
             );
 
