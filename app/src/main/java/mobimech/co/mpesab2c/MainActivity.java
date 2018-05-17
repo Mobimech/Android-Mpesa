@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
         String amount = edAmount.getText().toString().trim();
 
         if (TextUtils.isEmpty(amount)) {
-            editText.setError("Please Provide a Phone Number");
+            edAmount.setError("Please Provide the amount");
+
             return;
         } else {
             B2CPaymentRequest request = new B2CPaymentRequest(
