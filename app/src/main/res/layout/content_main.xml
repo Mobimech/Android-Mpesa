@@ -16,7 +16,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="24dp"
         android:padding="10dp"
-        android:text="Make sample STK push and B2C transactions using this test project. Note that all credentials are from the daraja sandbox."
+        android:text="Make sample STK push and B2C transactions using this test project. Note that all credentials are from the daraja sandbox. Please replace with your own."
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

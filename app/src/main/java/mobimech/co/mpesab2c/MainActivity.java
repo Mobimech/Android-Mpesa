@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResult(@NonNull C2BPaymentResponse c2BPaymentResponse) {
                             dialog.dismiss();
+                            editText.setText("");
                             Toast.makeText(MainActivity.this, "Success",Toast.LENGTH_SHORT).show();
                         }
 
@@ -162,28 +163,40 @@ public class MainActivity extends AppCompatActivity {
 
             return;
         } else {
+
+            dialog = new ProgressDialog(this);
+            dialog.setMessage("Please wait");
+            dialog.setCancelable(false);
+            dialog.show();
             B2CPaymentRequest request = new B2CPaymentRequest(
                     amount,
                     "BusinessPayment",
+                    "testapi251",
+                    "Good",
                     "600251",
                     "254708374149",
                     "http://mycallbackurl.com/checkout.php",
                     "Good",
-                    "testapi251",
-                    "Safaricom251!",
                     "http://mycallbackurl.com/checkout.php",
-                    "Good"
+                    "Safaricom251!"
             );
 
             mpesa.B2CMpesaPayment(request, new MpesaLib<B2CPaymentResponse>() {
                 @Override
                 public void onResult(@NonNull B2CPaymentResponse b2CPaymentResponse) {
+                    dialog.dismiss();
+                    editText.setText("");
                     Log.wtf("Button", "success");
+                    Toast.makeText(MainActivity.this, "Success",Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onError(String error) {
+                    dialog.dismiss();
+                    editText.setText("");
                     Log.wtf("Button", "Fail: " + error);
+                    Toast.makeText(MainActivity.this, "Fail: "+error,Toast.LENGTH_SHORT).show();
+
 
                 }
             });
