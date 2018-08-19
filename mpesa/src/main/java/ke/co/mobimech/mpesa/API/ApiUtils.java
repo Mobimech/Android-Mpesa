@@ -8,38 +8,38 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ApiUtils {
-    private static API api = null;
+    private static MpesaApi mpesaApi = null;
     private static HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
 
     static {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
-    public static API getPaymentAPI(String BASE_URL, String authToken) {
+    public static MpesaApi getPaymentAPI(String BASE_URL, String authToken) {
         OkHttpClient client=NetworkClient.getPaymentOkhttpClient(authToken);
-        if (api == null) {
-            api = new Retrofit.Builder()
+        if (mpesaApi == null) {
+            mpesaApi = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
-                    .create(API.class);
+                    .create(MpesaApi.class);
         }
-        return api;
+        return mpesaApi;
     }
 
-    public static API getSTKPushAPI(String BASE_URL, String authToken) {
+    public static MpesaApi getSTKPushAPI(String BASE_URL, String authToken) {
         OkHttpClient client=NetworkClient.getSTKPushOkhttpClient(authToken);
 
-        if (api == null) {
-            api = new Retrofit.Builder()
+        if (mpesaApi == null) {
+            mpesaApi = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
-                    .create(API.class);
+                    .create(MpesaApi.class);
         }
-        return api;
+        return mpesaApi;
     }
 
     public static AuthAPI getAuthenticationAPI(String CONSUMER_KEY, String CONSUMER_SECRET, String BASE_URL) {
